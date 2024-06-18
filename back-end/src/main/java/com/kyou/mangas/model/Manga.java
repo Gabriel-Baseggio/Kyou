@@ -22,6 +22,8 @@ public class Manga {
 
     private String title;
 
+    private String cover;
+
     private Set<String> alternativeTitles;
 
     private int numberOfChapters;
@@ -31,12 +33,13 @@ public class Manga {
 
     private String description;
 
+    @Enumerated
     private Status status;
 
-    @OneToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private Set<Category> categories;
 
-    @OneToMany
+    @OneToMany(mappedBy = "manga")
     private List<Chapter> chapters;
 
 }

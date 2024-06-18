@@ -19,9 +19,12 @@ public class Chapter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @ManyToOne
+    private Manga manga;
+
     private double chapter;
 
-    @OneToMany
+    @OneToMany(mappedBy = "chapter")
     private List<Page> pages;
 
 }

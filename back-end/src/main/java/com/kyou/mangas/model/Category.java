@@ -1,13 +1,12 @@
 package com.kyou.mangas.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -20,6 +19,11 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @ManyToMany(mappedBy = "categories")
+    private Set<Manga> mangas;
+
     private String category;
+
+
 
 }
