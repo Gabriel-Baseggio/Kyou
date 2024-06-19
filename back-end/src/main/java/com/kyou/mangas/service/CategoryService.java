@@ -1,12 +1,14 @@
 package com.kyou.mangas.service;
 
 import com.kyou.mangas.model.Category;
+import com.kyou.mangas.model.Manga;
 import com.kyou.mangas.repository.CategoryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -25,6 +27,10 @@ public class CategoryService {
             throw new RuntimeException("Categoria não encontrada");
 
         return optional.get();
+    }
+
+    public Category getCategory(String category) {
+        return categoryRepository.findByCategory(category);
     }
 
     public Category createCategory(Category category) {
@@ -51,5 +57,4 @@ public class CategoryService {
         if (!(categoryRepository.existsById(id)))
             throw new RuntimeException("Categoria não encontrada");
     }
-
 }

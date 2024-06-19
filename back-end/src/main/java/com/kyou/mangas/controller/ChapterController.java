@@ -24,6 +24,11 @@ public class ChapterController {
         return chapterService.getChapter(id);
     }
 
+    @GetMapping("/{chapter}")
+    public Chapter getChapter(@PathVariable Double chapter) {
+        return chapterService.getChapter(chapter);
+    }
+
     @PostMapping
     public Chapter createChapter(@RequestBody Chapter category) {
         return chapterService.createChapter(category);

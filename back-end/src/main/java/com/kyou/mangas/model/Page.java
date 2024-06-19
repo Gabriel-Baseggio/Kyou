@@ -1,10 +1,7 @@
 package com.kyou.mangas.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 @Entity
 @AllArgsConstructor
@@ -17,10 +14,10 @@ public class Page {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Chapter chapter;
 
-    private int number;
+    private Integer number;
 
     private String pageImage;
 }

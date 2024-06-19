@@ -1,5 +1,6 @@
 package com.kyou.mangas.service;
 
+import com.kyou.mangas.model.Chapter;
 import com.kyou.mangas.model.Page;
 import com.kyou.mangas.repository.PageRepository;
 import lombok.AllArgsConstructor;
@@ -18,13 +19,17 @@ public class PageService {
         return pageRepository.findAll();
     }
 
-    public Page getPage(Integer id) {
+    public Page getPageById(Integer id) {
         Optional<Page> optional = pageRepository.findById(id);
 
         if (optional.isEmpty())
             throw new RuntimeException("Página não encontrada");
 
         return optional.get();
+    }
+
+    public Page getPageByNumber(Integer page) {
+        return pageRepository.findByNumber(page);
     }
 
     public Page createPage(Page category) {
@@ -51,5 +56,6 @@ public class PageService {
         if (!(pageRepository.existsById(id)))
             throw new RuntimeException("Página não encontrada");
     }
+
 
 }

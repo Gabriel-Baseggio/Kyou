@@ -1,11 +1,13 @@
 package com.kyou.mangas.controller;
 
+import com.kyou.mangas.model.Category;
 import com.kyou.mangas.model.Manga;
 import com.kyou.mangas.service.MangaService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/manga")
@@ -24,6 +26,11 @@ public class MangaController {
         return mangaService.getManga(id);
     }
 
+    @GetMapping("/{title}")
+    public Manga getManga(@PathVariable String title) {
+        return mangaService.getManga(title);
+    }
+
     @PostMapping
     public Manga createManga(@RequestBody Manga category) {
         return mangaService.createManga(category);
@@ -32,6 +39,11 @@ public class MangaController {
     @PutMapping
     public Manga updateManga(@RequestBody Manga updatedManga) {
         return mangaService.updateManga(updatedManga);
+    }
+
+    @PutMapping("/adicionarCategoria/{mangaId}")
+    public Manga addCategory(@PathVariable Integer mangaId, @RequestBody String categoryId) {
+        return mangaService.addCategory(mangaId, categoryId);
     }
 
     @DeleteMapping

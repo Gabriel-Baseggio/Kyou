@@ -27,6 +27,10 @@ public class ChapterService {
         return optional.get();
     }
 
+    public Chapter getChapter(Double chapter) {
+        return chapterRepository.findByChapter(chapter);
+    }
+
     public Chapter createChapter(Chapter category) {
         return chapterRepository.save(category);
     }

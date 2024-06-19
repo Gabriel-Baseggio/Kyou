@@ -1,11 +1,13 @@
 package com.kyou.mangas.controller;
 
 import com.kyou.mangas.model.Category;
+import com.kyou.mangas.model.Manga;
 import com.kyou.mangas.service.CategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/categoria")
@@ -22,6 +24,11 @@ public class CategoryController {
     @GetMapping("/{id}")
     public Category getCategory(@PathVariable Integer id) {
         return categoryService.getCategory(id);
+    }
+
+    @GetMapping("/{category}")
+    public Category getCategory(@PathVariable String category) {
+        return categoryService.getCategory(category);
     }
 
     @PostMapping

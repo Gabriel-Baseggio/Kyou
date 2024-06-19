@@ -19,12 +19,12 @@ public class Chapter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Manga manga;
 
-    private double chapter;
+    private Double chapter;
 
-    @OneToMany(mappedBy = "chapter")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "chapter", cascade = CascadeType.ALL)
     private List<Page> pages;
 
 }

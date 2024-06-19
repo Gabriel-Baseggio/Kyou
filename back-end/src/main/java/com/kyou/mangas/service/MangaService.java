@@ -1,5 +1,6 @@
 package com.kyou.mangas.service;
 
+import com.kyou.mangas.model.Category;
 import com.kyou.mangas.model.Manga;
 import com.kyou.mangas.repository.MangaRepository;
 import lombok.AllArgsConstructor;
@@ -7,12 +8,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
 public class MangaService {
 
     private final MangaRepository mangaRepository;
+
+    private final CategoryService categoryService;
 
     public List<Manga> getMangas() {
         return mangaRepository.findAll();
@@ -27,8 +31,12 @@ public class MangaService {
         return optional.get();
     }
 
-    public Manga createManga(Manga category) {
-        return mangaRepository.save(category);
+    public Manga getManga(String title) {
+        return mangaRepository.findByTitle(title);
+    }
+
+    public Manga createManga(Manga manga) {
+        return mangaRepository.save(manga);
     }
 
     public Manga updateManga(Manga updatedManga) {
@@ -52,4 +60,15 @@ public class MangaService {
             throw new RuntimeException("Mangá não encontrado");
     }
 
+    public Manga addCategory(Integer mangaId, String categoryId) {
+        Integer categoryIdInt = Integer.valueOf(categoryId);
+
+        Category category = categoryService.getCategory(categoryIdInt);
+        Manga manga = getManga(mangaId);
+
+        manga.addCategory(category);
+        category.addManga(manga);
+
+        return updateManga(manga);
+    }
 }

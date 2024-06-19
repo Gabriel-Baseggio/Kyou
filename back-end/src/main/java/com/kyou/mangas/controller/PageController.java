@@ -1,5 +1,7 @@
 package com.kyou.mangas.controller;
 
+import com.kyou.mangas.model.Chapter;
+import com.kyou.mangas.model.Manga;
 import com.kyou.mangas.model.Page;
 import com.kyou.mangas.service.PageService;
 import lombok.AllArgsConstructor;
@@ -20,8 +22,13 @@ public class PageController {
     }
 
     @GetMapping("/{id}")
-    public Page getPage(@PathVariable Integer id) {
-        return pageService.getPage(id);
+    public Page getPageById(@PathVariable Integer id) {
+        return pageService.getPageById(id);
+    }
+
+    @GetMapping("/{page}")
+    public Page getPageByNumber(@PathVariable Integer page) {
+        return pageService.getPageByNumber(page);
     }
 
     @PostMapping

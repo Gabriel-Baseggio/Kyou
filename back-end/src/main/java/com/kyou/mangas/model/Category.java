@@ -1,10 +1,7 @@
 package com.kyou.mangas.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.Set;
 
@@ -19,11 +16,13 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToMany(mappedBy = "categories")
+    @Setter
+    @ManyToMany(mappedBy = "categories", cascade = CascadeType.ALL)
     private Set<Manga> mangas;
 
     private String category;
 
-
-
+    public void addManga(Manga manga) {
+        this.mangas.add(manga);
+    }
 }
