@@ -1,6 +1,7 @@
 package com.kyou.mangas.service;
 
 import com.kyou.mangas.model.Category;
+import com.kyou.mangas.model.Chapter;
 import com.kyou.mangas.model.Manga;
 import com.kyou.mangas.repository.MangaRepository;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,7 @@ public class MangaService {
     private final MangaRepository mangaRepository;
 
     private final CategoryService categoryService;
+    private final ChapterService chapterService;
 
     public List<Manga> getMangas() {
         return mangaRepository.findAll();
@@ -67,8 +69,16 @@ public class MangaService {
         Manga manga = getManga(mangaId);
 
         manga.addCategory(category);
-        category.addManga(manga);
+        return updateManga(manga);
+    }
 
+    public Manga addChapter(Integer mangaId, String chapterId) {
+        Integer chapterIdInt = Integer.valueOf(chapterId);
+
+        Chapter chapter = chapterService.getChapter(chapterIdInt);
+        Manga manga = getManga(mangaId);
+
+        manga.addChapter(chapter);
         return updateManga(manga);
     }
 }

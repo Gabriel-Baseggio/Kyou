@@ -16,13 +16,5 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Setter
-    @ManyToMany(mappedBy = "categories", cascade = CascadeType.ALL)
-    private Set<Manga> mangas;
-
     private String category;
-
-    public void addManga(Manga manga) {
-        this.mangas.add(manga);
-    }
 }

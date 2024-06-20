@@ -1,14 +1,13 @@
 package com.kyou.mangas.controller;
 
-import com.kyou.mangas.model.Category;
 import com.kyou.mangas.model.Manga;
 import com.kyou.mangas.service.MangaService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/manga")
 @AllArgsConstructor
@@ -44,6 +43,11 @@ public class MangaController {
     @PutMapping("/adicionarCategoria/{mangaId}")
     public Manga addCategory(@PathVariable Integer mangaId, @RequestBody String categoryId) {
         return mangaService.addCategory(mangaId, categoryId);
+    }
+
+    @PutMapping("/adicionarCapitulo/{mangaId}")
+    public Manga addChapter(@PathVariable Integer mangaId, @RequestBody String chapterId) {
+        return mangaService.addChapter(mangaId, chapterId);
     }
 
     @DeleteMapping

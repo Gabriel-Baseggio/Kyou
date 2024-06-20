@@ -24,7 +24,7 @@ public class Manga {
 
     private String cover;
 
-    private int numberOfChapters;
+    private Integer numberOfChapters;
 
     @Column(precision = 2)
     private Double rating;
@@ -37,10 +37,14 @@ public class Manga {
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<Category> categories;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "manga", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Chapter> chapters;
 
     public void addCategory(Category category) {
         this.categories.add(category);
+    }
+
+    public void addChapter(Chapter chapter) {
+        this.chapters.add(chapter);
     }
 }

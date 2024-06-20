@@ -18,7 +18,7 @@ export default function MangaCard({ manga }: MangaCardProps) {
     <Link href={"/manga/" + formatTitle(manga.title)}>
       <Card className="w-auto flex flex-col justify-end h-64 md:h-96 relative ">
         <Image
-          src={"/covers/" + manga.image}
+          src={manga.cover}
           alt={manga.title + " cover"}
           width={1000}
           height={1000}

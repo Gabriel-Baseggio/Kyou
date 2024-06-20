@@ -14,9 +14,6 @@ public class Page {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Chapter chapter;
-
     private Integer number;
 
     private String pageImage;

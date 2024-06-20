@@ -1,7 +1,10 @@
 package com.kyou.mangas.service;
 
 import com.kyou.mangas.model.Chapter;
+import com.kyou.mangas.model.Manga;
+import com.kyou.mangas.model.Page;
 import com.kyou.mangas.repository.ChapterRepository;
+import com.kyou.mangas.repository.MangaRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,7 @@ import java.util.Optional;
 public class ChapterService {
 
     private final ChapterRepository chapterRepository;
+    private final PageService pageService;
 
     public List<Chapter> getChapters() {
         return chapterRepository.findAll();
@@ -56,4 +60,13 @@ public class ChapterService {
             throw new RuntimeException("Capítulo não encontrado");
     }
 
+    public Chapter addPage(Integer chapterId, String pageId) {
+        Integer pageIdInt = Integer.valueOf(pageId);
+
+        Page page = pageService.getPageById(pageIdInt);
+        Chapter chapter = getChapter(chapterId);
+
+        chapter.addPage(page);
+        return updateChapter(chapter);
+    }
 }
