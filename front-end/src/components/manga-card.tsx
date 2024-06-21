@@ -10,12 +10,8 @@ interface MangaCardProps {
 }
 
 export default function MangaCard({ manga }: MangaCardProps) {
-  const formatTitle = (title: string) => {
-    return title.replace(/ /g, "-").toLowerCase();
-  };
-
   return (
-    <Link href={"/manga/" + formatTitle(manga.title)}>
+    <Link href={"/manga/" + manga.title}>
       <Card className="w-auto flex flex-col justify-end h-64 md:h-96 relative ">
         <Image
           src={manga.cover}

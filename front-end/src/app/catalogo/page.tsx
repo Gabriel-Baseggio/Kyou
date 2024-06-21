@@ -9,21 +9,21 @@ export default function CatalogoPage() {
   const [mangas, setMangas] = useState<Manga[] | null>(null);
 
   useEffect(() => {
-    fetchData("manga").then((data) => {
+    fetchData().then((data) => {
       setMangas(data);
     });
   }, []);
 
-  const mostrarMangas = () => {
+  const showMangas = () => {
     if (!mangas || mangas.length === 0) {
-      return mostrarSkeleton();
+      return showSkeleton();
     }
     return mangas.map((manga, index) => (
       <MangaCard key={index} manga={manga} />
     ));
   };
 
-  const mostrarSkeleton = () => {
+  const showSkeleton = () => {
     let skeletons = [];
 
     for (let i = 0; i < 10; i++) {
@@ -38,7 +38,7 @@ export default function CatalogoPage() {
   return (
     <main>
       <div className="w-full px-16 py-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-        {mostrarMangas()}
+        {showMangas()}
       </div>
     </main>
   );

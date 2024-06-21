@@ -1,15 +1,13 @@
 package com.kyou.mangas.controller;
 
 import com.kyou.mangas.model.Category;
-import com.kyou.mangas.model.Manga;
 import com.kyou.mangas.service.CategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/categoria")
 @AllArgsConstructor
