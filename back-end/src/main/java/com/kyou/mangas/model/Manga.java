@@ -24,11 +24,14 @@ public class Manga {
 
     private String cover;
 
+    private String banner;
+
     private Integer numberOfChapters;
 
     @Column(precision = 2)
     private Double rating;
 
+    @Column(length = 100000)
     private String description;
 
     @Enumerated

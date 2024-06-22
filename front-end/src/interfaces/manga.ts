@@ -4,6 +4,7 @@ import { Status } from "./status";
 
 export interface Manga {
   title: string;
+  banner: string;
   cover: string;
   numberOfChapters: number;
   rating: number;

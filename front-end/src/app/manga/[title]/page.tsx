@@ -1,5 +1,6 @@
 "use client";
 
+import ChapterItem from "@/components/chapter-item";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Manga } from "@/interfaces/manga";
@@ -63,8 +64,8 @@ export default function MangaPage({ params }: { params: { title: string } }) {
         <div className="w-full h-72">
           <img
             className="w-full h-full object-center object-cover"
-            alt="Manga cover"
-            src={manga.cover}
+            alt="Manga banner"
+            src={manga.banner}
           />
         </div>
         <div className="w-full flex">
@@ -95,6 +96,14 @@ export default function MangaPage({ params }: { params: { title: string } }) {
             </div>
             <div className="w-full">
               <p className="w-full">{renderText()}</p>
+            </div>
+            <div className="w-full flex flex-col gap-4">
+              <h4 className="text-lg font-bold">Capítulos</h4>
+              <div className="w-full flex flex-col gap-2">
+                {manga.chapters.map((chapter, index) => {
+                  return <ChapterItem key={index} chapter={chapter} />;
+                })}
+              </div>
             </div>
           </section>
         </div>

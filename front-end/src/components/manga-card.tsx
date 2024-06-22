@@ -11,7 +11,7 @@ interface MangaCardProps {
 export default function MangaCard({ manga }: MangaCardProps) {
   return (
     <Link href={"/manga/" + manga.title}>
-      <Card className="w-auto flex flex-col justify-end h-64 md:h-96 relative ">
+      <Card className="w-full aspect-[5/7] flex flex-col justify-end relative ">
         <img
           src={manga.cover}
           alt={manga.title + " cover"}

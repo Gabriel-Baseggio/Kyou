@@ -12,14 +12,15 @@ import {
   usePathname,
   useRouter,
 } from "../../../../../node_modules/next/navigation";
+import Link from "next/link";
 
 export default function ChapterPage({
   params,
 }: {
   params: { title: string; chapter: string };
 }) {
-  const [chapter, setChapter] = useState<Chapter | null>(null);
   const [manga, setManga] = useState<Manga | null>(null);
+  const [chapter, setChapter] = useState<Chapter | null>(null);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -33,16 +34,33 @@ export default function ChapterPage({
     });
   }, [params.title]);
 
-  const prevChapter = () => {
+  const formatPathname = (pathname: string) => {
+    return pathname.split("/").slice(0, -1).join("/");
+  };
+
+  const changeChapter = (next: boolean) => {
+    let tempChapter: Chapter | undefined;
+    for (let i = 0; i < manga?.chapters!.length!; i++) {
+      if (manga?.chapters[i].chapter == chapter?.chapter) {
+        if (next) {
+          tempChapter = manga?.chapters[i + 1];
+        } else {
+          tempChapter = manga?.chapters[i - 1];
+        }
+      }
+    }
+    router.push(formatPathname(pathname) + "/" + tempChapter?.chapter);
+  };
+
+  const nextChapter = () => {
     let nextChapter;
     for (let i = 0; i < manga?.chapters!.length!; i++) {
       if (manga?.chapters[i].chapter == chapter?.chapter) {
         nextChapter = manga?.chapters[i + 1];
       }
     }
+    router.push(formatPathname(pathname) + "/" + nextChapter?.chapter);
   };
-
-  const nextChapter = () => {};
 
   const findChapter = () => {
     for (let i = 0; i < manga?.chapters!.length!; i++) {
@@ -60,13 +78,16 @@ export default function ChapterPage({
     return (
       <section className="w-1/3 flex flex-col items-center gap-2">
         <div className="w-full flex justify-between">
-          <Button disabled={findChapter() == 0} onClick={prevChapter()}>
+          <Button
+            disabled={findChapter() == 0}
+            onClick={() => changeChapter(false)}
+          >
             {/* <ArrowBigLeft /> */}
             Anterior
           </Button>
           <Button
             disabled={findChapter() == manga?.chapters!.length! - 1}
-            onClick={nextChapter()}
+            onClick={() => changeChapter(true)}
           >
             {/* <ArrowBigRight /> */}
             Próximo
@@ -85,13 +106,16 @@ export default function ChapterPage({
           })}
         </div>
         <div className="w-full flex justify-between">
-          <Button disabled={findChapter() == 0} onClick={prevChapter()}>
+          <Button
+            disabled={findChapter() == 0}
+            onClick={() => changeChapter(false)}
+          >
             {/* <ArrowBigLeft /> */}
             Anterior
           </Button>
           <Button
             disabled={findChapter() == manga?.chapters!.length! - 1}
-            onClick={nextChapter()}
+            onClick={() => changeChapter(true)}
           >
             {/* <ArrowBigRight /> */}
             Próximo
@@ -107,7 +131,9 @@ export default function ChapterPage({
 
   return (
     <main className="w-full flex flex-col items-center pt-4 gap-4">
-      <h4 className="text-3xl font-bold">{params.title}</h4>
+      <Link href={"/manga/" + params.title} className="text-3xl font-bold">
+        {manga?.title}
+      </Link>
       <h2 className="text-xl font-bold">Capítulo {params.chapter}</h2>
       {showChapter()}
     </main>
