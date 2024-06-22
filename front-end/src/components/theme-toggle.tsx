@@ -5,7 +5,6 @@ import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { Skeleton } from "./ui/skeleton";
-import TooltipArea from "./tooltip-area";
 
 export function ThemeToggle() {
   const [mounted, setMounted] = useState(false);

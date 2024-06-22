@@ -9,6 +9,18 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "qph.cf2.quoracdn.net",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "i.pinimg.com",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };

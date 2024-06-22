@@ -34,9 +34,4 @@ public class TestController {
         return testService.getChapterOfManga(title, chapterNumber);
     }
 
-    @GetMapping("/{title}/{chapterNumber}/{pageNumber}")
-    public Page getPageOfChapter(@PathVariable String title, @PathVariable Double chapterNumber, @PathVariable Integer pageNumber) {
-        return testService.getPageOfChapter(title, chapterNumber, pageNumber);
-    }
-
 }

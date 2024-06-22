@@ -1,13 +1,10 @@
 "use client";
 
-import MangaCard from "@/components/manga-card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Manga } from "@/interfaces/manga";
 import { Status } from "@/interfaces/status";
 import { fetchData } from "@/tools/api";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function MangaPage({ params }: { params: { title: string } }) {
@@ -64,12 +61,10 @@ export default function MangaPage({ params }: { params: { title: string } }) {
     return (
       <>
         <div className="w-full h-72">
-          <Image
+          <img
             className="w-full h-full object-center object-cover"
             alt="Manga cover"
             src={manga.cover}
-            width={1000}
-            height={1000}
           />
         </div>
         <div className="w-full flex">
@@ -78,12 +73,10 @@ export default function MangaPage({ params }: { params: { title: string } }) {
               <p className="w-1/4 bg-background flex justify-center rounded-t-md ">
                 # {manga.rating}
               </p>
-              <Image
+              <img
                 className="min-h-72 min-w-60 border-background border-4 rounded-md"
                 alt="Manga cover"
                 src={manga.cover}
-                width={1000}
-                height={1000}
               />
             </div>
             <div>
