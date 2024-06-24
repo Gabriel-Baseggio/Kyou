@@ -1,20 +1,20 @@
-package com.kyou.mangas.model;
+package com.kyou.mangas.model.manga;
 
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.Set;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Getter
-public class Category {
+public class Page {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String category;
+    private Integer number;
+
+    private String pageImage;
 }

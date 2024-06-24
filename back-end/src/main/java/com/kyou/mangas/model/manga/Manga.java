@@ -1,4 +1,4 @@
-package com.kyou.mangas.model;
+package com.kyou.mangas.model.manga;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

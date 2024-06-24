@@ -1,4 +1,4 @@
-package com.kyou.mangas.model;
+package com.kyou.mangas.model.manga;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -8,13 +8,11 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 @Getter
-public class Page {
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer number;
-
-    private String pageImage;
+    private String category;
 }

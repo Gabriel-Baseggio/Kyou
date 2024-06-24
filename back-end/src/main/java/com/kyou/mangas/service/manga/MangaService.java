@@ -1,15 +1,14 @@
-package com.kyou.mangas.service;
+package com.kyou.mangas.service.manga;
 
-import com.kyou.mangas.model.Category;
-import com.kyou.mangas.model.Chapter;
-import com.kyou.mangas.model.Manga;
-import com.kyou.mangas.repository.MangaRepository;
+import com.kyou.mangas.model.manga.Category;
+import com.kyou.mangas.model.manga.Chapter;
+import com.kyou.mangas.model.manga.Manga;
+import com.kyou.mangas.repository.manga.MangaRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 @AllArgsConstructor

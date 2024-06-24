@@ -1,6 +1,6 @@
-package com.kyou.mangas.repository;
+package com.kyou.mangas.repository.manga;
 
-import com.kyou.mangas.model.Page;
+import com.kyou.mangas.model.manga.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
