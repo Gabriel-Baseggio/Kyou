@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -20,6 +21,7 @@ public class MangaService {
     private final ChapterService chapterService;
 
     public List<Manga> getMangas() {
+        System.out.println(mangaRepository.findAll());
         return mangaRepository.findAll();
     }
 
@@ -28,6 +30,8 @@ public class MangaService {
 
         if (optional.isEmpty())
             throw new RuntimeException("Mangá não encontrado");
+
+
 
         return optional.get();
     }
@@ -61,23 +65,33 @@ public class MangaService {
             throw new RuntimeException("Mangá não encontrado");
     }
 
-    public Manga addCategory(Integer mangaId, String categoryId) {
-        Integer categoryIdInt = Integer.valueOf(categoryId);
-
-        Category category = categoryService.getCategory(categoryIdInt);
+    public Manga addCategories(Integer mangaId, Set<Integer> categoriesId) {
         Manga manga = getManga(mangaId);
 
-        manga.addCategory(category);
+        for (Integer categoryId: categoriesId) {
+            Category category = categoryService.getCategory(categoryId);
+
+            category.addManga(manga);
+            categoryService.updateCategory(category);
+
+            manga.addCategory(category);
+        }
+
         return updateManga(manga);
     }
 
-    public Manga addChapter(Integer mangaId, String chapterId) {
-        Integer chapterIdInt = Integer.valueOf(chapterId);
-
-        Chapter chapter = chapterService.getChapter(chapterIdInt);
+    public Manga addChapters(Integer mangaId, Set<Integer> chaptersId) {
         Manga manga = getManga(mangaId);
 
-        manga.addChapter(chapter);
+        for (Integer chapterId: chaptersId) {
+            Chapter chapter = chapterService.getChapter(chapterId);
+
+            chapter.setManga(manga);
+            chapterService.updateChapter(chapter);
+
+            manga.addChapter(chapter);
+        }
+
         return updateManga(manga);
     }
 }

@@ -11,6 +11,7 @@ export default function CatalogoPage() {
   useEffect(() => {
     fetchData().then((data) => {
       setMangas(data);
+      console.log(data);
     });
   }, []);
 

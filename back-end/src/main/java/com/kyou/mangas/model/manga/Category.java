@@ -3,6 +3,8 @@ package com.kyou.mangas.model.manga;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,4 +17,11 @@ public class Category {
     private Integer id;
 
     private String category;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<Manga> mangas;
+
+    public void addManga(Manga manga){
+        this.mangas.add(manga);
+    }
 }

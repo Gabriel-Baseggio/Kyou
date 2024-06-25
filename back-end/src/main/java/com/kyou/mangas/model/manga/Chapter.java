@@ -1,10 +1,7 @@
 package com.kyou.mangas.model.manga;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.List;
 
@@ -21,7 +18,11 @@ public class Chapter {
 
     private Double chapter;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne
+    @Setter
+    private Manga manga;
+
+    @OneToMany(mappedBy = "chapter", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Page> pages;
 
     public void addPage(Page page) {

@@ -37,10 +37,10 @@ public class Manga {
     @Enumerated
     private Status status;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "mangas", cascade = CascadeType.ALL)
     private Set<Category> categories;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "manga", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Chapter> chapters;
 
     public void addCategory(Category category) {

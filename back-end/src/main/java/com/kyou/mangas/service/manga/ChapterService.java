@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -58,13 +59,18 @@ public class ChapterService {
             throw new RuntimeException("Capítulo não encontrado");
     }
 
-    public Chapter addPage(Integer chapterId, String pageId) {
-        Integer pageIdInt = Integer.valueOf(pageId);
-
-        Page page = pageService.getPageById(pageIdInt);
+    public Chapter addPages(Integer chapterId, Set<Integer> pagesId) {
         Chapter chapter = getChapter(chapterId);
 
-        chapter.addPage(page);
+        for (Integer pageId: pagesId) {
+            Page page = pageService.getPageById(pageId);
+
+            page.setChapter(chapter);
+            pageService.updatePage(page);
+
+            chapter.addPage(page);
+        }
+
         return updateChapter(chapter);
     }
 }

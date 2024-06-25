@@ -1,12 +1,14 @@
 package com.kyou.mangas.controller.manga;
 
 import com.kyou.mangas.model.manga.Category;
+import com.kyou.mangas.model.manga.Manga;
 import com.kyou.mangas.service.manga.CategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @CrossOrigin(origins = "*")
 @RestController

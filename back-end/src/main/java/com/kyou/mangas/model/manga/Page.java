@@ -17,4 +17,8 @@ public class Page {
     private Integer number;
 
     private String pageImage;
+
+    @ManyToOne
+    @Setter
+    private Chapter chapter;
 }

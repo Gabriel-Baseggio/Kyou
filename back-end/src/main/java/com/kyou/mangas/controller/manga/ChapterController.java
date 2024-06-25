@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -41,9 +42,9 @@ public class ChapterController {
         return ResponseEntity.ok(chapterService.updateChapter(updatedChapter));
     }
 
-    @PutMapping("/adicionarPagina/{chapterId}")
-    public ResponseEntity<Chapter> addPage(@PathVariable Integer chapterId, @RequestBody String pageId) {
-        return ResponseEntity.ok(chapterService.addPage(chapterId, pageId));
+    @PutMapping("/adicionarPaginas/{chapterId}")
+    public ResponseEntity<Chapter> addPages(@PathVariable Integer chapterId, @RequestBody Set<Integer> pagesId) {
+        return ResponseEntity.ok(chapterService.addPages(chapterId, pagesId));
     }
 
     @DeleteMapping

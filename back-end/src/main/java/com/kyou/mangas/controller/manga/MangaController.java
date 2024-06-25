@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -17,8 +18,8 @@ public class MangaController {
     private final MangaService mangaService;
 
     @GetMapping
-    public ResponseEntity<List<Manga>> getMangas() {
-        return ResponseEntity.ok(mangaService.getMangas());
+    public List<Manga> getMangas() {
+        return mangaService.getMangas();
     }
 
     @GetMapping("/{id}")
@@ -41,14 +42,14 @@ public class MangaController {
         return ResponseEntity.ok(mangaService.updateManga(updatedManga));
     }
 
-    @PutMapping("/adicionarCategoria/{mangaId}")
-    public ResponseEntity<Manga> addCategory(@PathVariable Integer mangaId, @RequestBody String categoryId) {
-        return ResponseEntity.ok(mangaService.addCategory(mangaId, categoryId));
+    @PutMapping("/adicionarCategorias/{mangaId}")
+    public ResponseEntity<Manga> addCategories(@PathVariable Integer mangaId, @RequestBody Set<Integer> categoriesId) {
+        return ResponseEntity.ok(mangaService.addCategories(mangaId, categoriesId));
     }
 
-    @PutMapping("/adicionarCapitulo/{mangaId}")
-    public ResponseEntity<Manga> addChapter(@PathVariable Integer mangaId, @RequestBody String chapterId) {
-        return ResponseEntity.ok(mangaService.addChapter(mangaId, chapterId));
+    @PutMapping("/adicionarCapitulos/{mangaId}")
+    public ResponseEntity<Manga> addChapters(@PathVariable Integer mangaId, @RequestBody Set<Integer> chaptersId) {
+        return ResponseEntity.ok(mangaService.addChapters(mangaId, chaptersId));
     }
 
     @DeleteMapping
