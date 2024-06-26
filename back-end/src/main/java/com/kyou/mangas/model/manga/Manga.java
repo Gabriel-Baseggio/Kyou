@@ -1,5 +1,6 @@
 package com.kyou.mangas.model.manga;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -37,9 +38,11 @@ public class Manga {
     @Enumerated
     private Status status;
 
+    @JsonManagedReference
     @ManyToMany(mappedBy = "mangas", cascade = CascadeType.ALL)
     private Set<Category> categories;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "manga", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Chapter> chapters;
 

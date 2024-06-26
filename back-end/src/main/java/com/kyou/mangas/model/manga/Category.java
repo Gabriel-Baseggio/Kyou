@@ -1,7 +1,11 @@
 package com.kyou.mangas.model.manga;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.Set;
 
@@ -18,6 +22,7 @@ public class Category {
 
     private String category;
 
+    @JsonBackReference
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<Manga> mangas;
 

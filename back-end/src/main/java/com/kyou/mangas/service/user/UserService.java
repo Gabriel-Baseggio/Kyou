@@ -1,33 +1,37 @@
 package com.kyou.mangas.service.user;
 
 import com.kyou.mangas.model.user.User;
-import com.kyou.mangas.model.user.UserAuthDTO;
-import com.kyou.mangas.model.user.UserCreationDTO;
 import com.kyou.mangas.repository.user.UserRepository;
-import com.kyou.mangas.security.TokenService;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
+@AllArgsConstructor
 public class UserService implements UserDetailsService {
 
-    @Autowired
     private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username);
+        Optional<User> user = userRepository.findByUsername(username);
+        if (user.isPresent()){
+            return user.get();
+        }
+
+
+        throw new UsernameNotFoundException(username);
     }
 
+    public User registerUser(User user) {
+        if (userRepository.findByUsername(user.getUsername()).isPresent())
+            throw new RuntimeException("Já tem esse user");
 
-
+        return userRepository.save(user);
+    }
 }

@@ -26,8 +26,8 @@ public class PageController {
         return ResponseEntity.ok(pageService.getPageById(id));
     }
 
-    @GetMapping("/{page}")
-    public ResponseEntity<Page> getPageByNumber(@PathVariable Integer page) {
+    @GetMapping("/number")
+    public ResponseEntity<Page> getPageByNumber(@RequestParam Integer page) {
         return ResponseEntity.ok(pageService.getPageByNumber(page));
     }
 

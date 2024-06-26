@@ -21,7 +21,6 @@ public class MangaService {
     private final ChapterService chapterService;
 
     public List<Manga> getMangas() {
-        System.out.println(mangaRepository.findAll());
         return mangaRepository.findAll();
     }
 

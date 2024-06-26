@@ -1,17 +1,12 @@
 package com.kyou.mangas.model.user;
 
-import lombok.Getter;
-
-@Getter
-public enum Role {
-
+public enum UserRole {
     ADMIN("ADMIN"),
     USER("USER");
 
-    private String role;
+    String role;
 
-    Role(String role) {
+    UserRole(String role) {
         this.role = role;
     }
-
 }
