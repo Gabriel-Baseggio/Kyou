@@ -24,7 +24,7 @@ export default function MangaCard({ manga }: MangaCardProps) {
               <Star className="text-foreground" /> {manga.rating}
             </p>
             <p className="flex gap-2">
-              {manga.numberOfChapters} <Book />
+              {manga.chapters.length} <Book />
             </p>
           </div>
         </CardFooter>
