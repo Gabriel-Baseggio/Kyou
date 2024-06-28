@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <header className="flex h-16 mt-8 items-center justify-center gap-4 border-bg bg-secondary/50 px-4 md:px-6">
+    <footer className="flex h-16 mt-8 items-center justify-center gap-4 border-bg bg-secondary/50 px-4 md:px-6">
       <p>
         Desenvolvido por:{" "}
         <Link
@@ -14,6 +14,6 @@ export default function Footer() {
           Gabriel Baseggio
         </Link>
       </p>
-    </header>
+    </footer>
   );
 }
