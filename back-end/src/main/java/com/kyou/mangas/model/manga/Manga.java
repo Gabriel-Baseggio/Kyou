@@ -27,8 +27,6 @@ public class Manga {
 
     private String banner;
 
-    private Integer numberOfChapters;
-
     @Column(precision = 2)
     private Double rating;
 
