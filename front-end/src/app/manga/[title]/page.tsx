@@ -22,6 +22,14 @@ export default function MangaPage({ params }: { params: { title: string } }) {
     if (!manga?.categories || manga.categories.length === 0) {
       return showSkeleton();
     }
+    manga.categories = manga.categories.sort((a, b) => {
+      if (a.category > b.category) {
+        return 1;
+      } else {
+        return -1;
+      }
+    });
+
     return manga.categories.map((category, index) => (
       <Badge key={index}>{category.category}</Badge>
     ));
@@ -81,7 +89,7 @@ export default function MangaPage({ params }: { params: { title: string } }) {
               />
             </div>
             <div>
-              <p>Capítulos: {manga.numberOfChapters}</p>
+              <p>Capítulos: {manga.chapters.length}</p>
               <p>
                 Status: {Status[manga.status as unknown as keyof typeof Status]}
               </p>
