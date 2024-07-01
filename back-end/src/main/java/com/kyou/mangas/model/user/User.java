@@ -1,5 +1,6 @@
 package com.kyou.mangas.model.user;
 
+import com.kyou.mangas.model.user.dto.UserLogin;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,6 +9,7 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Collection;
 import java.util.List;
@@ -28,6 +30,10 @@ public class User implements UserDetails {
     private String password;
 
     private UserRole role;
+
+    public boolean isLoginValid(UserLogin userLogin, PasswordEncoder passwordEncoder){
+        return passwordEncoder.matches(this.password, userLogin.password());
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

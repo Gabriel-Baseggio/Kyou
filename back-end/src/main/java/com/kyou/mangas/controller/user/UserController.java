@@ -1,5 +1,7 @@
 package com.kyou.mangas.controller.user;
 
+import com.kyou.mangas.model.user.dto.UserLogin;
+import com.kyou.mangas.model.user.dto.UserToken;
 import com.kyou.mangas.model.user.User;
 import com.kyou.mangas.service.user.UserService;
 import lombok.AllArgsConstructor;
@@ -15,12 +17,15 @@ import java.util.List;
 @AllArgsConstructor
 public class UserController {
 
-    private PasswordEncoder passwordEncoder;
     private UserService userService;
+
+    @PostMapping("/login")
+    public ResponseEntity<String> loginUser(@RequestBody UserLogin userLogin){
+        return ResponseEntity.ok(userService.login(userLogin));
+    }
 
     @PostMapping("/registro")
     public ResponseEntity registerUser(@RequestBody User user){
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         try {
             return ResponseEntity.ok(userService.registerUser(user));
         } catch (Exception e) {
