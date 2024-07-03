@@ -10,8 +10,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-@Getter
+@Data
 public class Chapter {
 
     @Id

@@ -7,8 +7,7 @@ import lombok.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-@Getter
+@Data
 public class Page {
 
     @Id
