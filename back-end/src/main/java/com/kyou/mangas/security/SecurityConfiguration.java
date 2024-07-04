@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.crypto.RsaKeyConversionServicePostProcessor;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -39,20 +41,17 @@ public class SecurityConfiguration {
     public SecurityConfiguration(RSAPublicKey publicKey, RSAPrivateKey privateKey) {
         this.publicKey = publicKey;
         this.privateKey = privateKey;
-        System.out.println(privateKey);
-        System.out.println(publicKey);
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         return http
-                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/usuario/login").permitAll()
-                        .anyRequest().authenticated()
-                )
-                .httpBasic(Customizer.withDefaults())
+                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/registro").permitAll()
+                        .anyRequest().authenticated())
+                .csrf(AbstractHttpConfigurer::disable)
                 .oauth2ResourceServer(conf -> conf.jwt(Customizer.withDefaults()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .build();
@@ -72,7 +71,7 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 

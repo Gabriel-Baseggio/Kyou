@@ -1,8 +1,8 @@
 package com.kyou.mangas.service;
 
-import com.kyou.mangas.model.manga.Chapter;
-import com.kyou.mangas.model.manga.Manga;
-import com.kyou.mangas.model.manga.Page;
+import com.kyou.mangas.entity.manga.Chapter;
+import com.kyou.mangas.entity.manga.Manga;
+import com.kyou.mangas.entity.manga.Page;
 import com.kyou.mangas.service.manga.ChapterService;
 import com.kyou.mangas.service.manga.MangaService;
 import lombok.AllArgsConstructor;

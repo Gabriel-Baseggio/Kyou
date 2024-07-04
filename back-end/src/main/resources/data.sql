@@ -248,3 +248,5 @@ VALUES
 (3, 'https://i.pinimg.com/736x/67/e5/ef/67e5ef8b2b104ad230c31ec49f65e4ce.jpg', 48),
 (4, 'https://i.pinimg.com/736x/67/e5/ef/67e5ef8b2b104ad230c31ec49f65e4ce.jpg', 49),
 (5, 'https://i.pinimg.com/736x/67/e5/ef/67e5ef8b2b104ad230c31ec49f65e4ce.jpg', 50);
+
+INSERT IGNORE INTO role (name) VALUES ("ADMIN"), ("USER");

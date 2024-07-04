@@ -1,28 +1,25 @@
-package com.kyou.mangas.model.manga;
+package com.kyou.mangas.entity.manga;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Set;
-
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Category {
+public class Page {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String category;
+    private Integer number;
+
+    private String pageImage;
 
     @JsonBackReference
-    @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Manga> mangas;
-
-    public void addManga(Manga manga){
-        this.mangas.add(manga);
-    }
+    @ManyToOne
+    @Setter
+    private Chapter chapter;
 }

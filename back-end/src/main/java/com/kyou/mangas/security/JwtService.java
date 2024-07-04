@@ -18,20 +18,15 @@ public class JwtService {
 
     private final JwtEncoder encoder;
 
-    public String generateToken(Authentication authentication){
+    public String generateToken(UserLogin userLogin){
         Instant now = Instant.now();
         long expiry = 3600l;
-
-        String role = authentication.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.joining(" "));
 
         JwtClaimsSet claims = JwtClaimsSet.builder()
                 .issuer("kyou-mangas")
                 .issuedAt(now)
                 .expiresAt(now.plusSeconds(expiry))
-                .subject(authentication.getName())
-                .claim("roles", role)
+                .subject(userLogin.username())
                 .build();
 
         return encoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();

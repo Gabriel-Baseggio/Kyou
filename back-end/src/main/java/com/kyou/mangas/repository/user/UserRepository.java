@@ -1,7 +1,6 @@
 package com.kyou.mangas.repository.user;
 
-import com.kyou.mangas.model.manga.Page;
-import com.kyou.mangas.model.user.User;
+import com.kyou.mangas.entity.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

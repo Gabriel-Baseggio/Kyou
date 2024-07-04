@@ -1,6 +1,6 @@
 package com.kyou.mangas.controller.manga;
 
-import com.kyou.mangas.model.manga.Chapter;
+import com.kyou.mangas.entity.manga.Chapter;
 import com.kyou.mangas.service.manga.ChapterService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;

@@ -1,7 +1,7 @@
 package com.kyou.mangas.service.user;
 
-import com.kyou.mangas.model.user.User;
-import com.kyou.mangas.model.user.UserAuthenticated;
+import com.kyou.mangas.entity.user.User;
+import com.kyou.mangas.entity.user.UserAuthenticated;
 import com.kyou.mangas.repository.user.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

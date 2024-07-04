@@ -1,4 +1,4 @@
-package com.kyou.mangas.model.manga;
+package com.kyou.mangas.entity.manga;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -17,6 +17,7 @@ public class Chapter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(nullable = false)
     private Double chapter;
 
     @ManyToOne

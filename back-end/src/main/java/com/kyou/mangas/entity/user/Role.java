@@ -1,4 +1,4 @@
-package com.kyou.mangas.model.user;
+package com.kyou.mangas.entity.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,15 +9,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(unique = true)
-    private String username;
-
-    private String password;
+    @Column(nullable = false)
+    private String name;
 
 }

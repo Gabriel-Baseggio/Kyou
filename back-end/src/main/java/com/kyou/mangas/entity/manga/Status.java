@@ -1,4 +1,4 @@
-package com.kyou.mangas.model.manga;
+package com.kyou.mangas.entity.manga;
 
 public enum Status {
 

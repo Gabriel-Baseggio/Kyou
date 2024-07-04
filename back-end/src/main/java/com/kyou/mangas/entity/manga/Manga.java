@@ -1,4 +1,4 @@
-package com.kyou.mangas.model.manga;
+package com.kyou.mangas.entity.manga;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -17,16 +17,19 @@ public class Manga {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(nullable = false)
     private String title;
 
+    @Column(nullable = false)
     private String cover;
 
+    @Column(nullable = false)
     private String banner;
 
-    @Column(precision = 2)
+    @Column(precision = 2, nullable = false)
     private Double rating;
 
-    @Column(length = 100000)
+    @Column(length = 100000, nullable = false)
     private String description;
 
     @Enumerated
