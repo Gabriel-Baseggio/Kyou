@@ -33,15 +33,14 @@ public class UserService {
     }
 
     public UserToken login(UserLogin userLogin) {
-
         Optional<User> user = userRepository.findByUsername(userLogin.username());
+
+
         if (user.isEmpty() || user.get().isLoginCorrect(userLogin.password(), bCryptPasswordEncoder)) {
             throw new BadCredentialsException("Usuário ou senha inválidos!");
         }
-        System.out.println(user.get());
 
-//        return new UserToken(jwtService.generateToken(userLogin));
-        return new UserToken("token");
+        return new UserToken(jwtService.generateToken(userLogin));
     }
 
     public void registerUser(UserRegister userRegister) {

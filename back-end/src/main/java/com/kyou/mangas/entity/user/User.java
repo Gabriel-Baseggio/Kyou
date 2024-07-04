@@ -25,7 +25,7 @@ public class User {
     private Role role;
 
     public boolean isLoginCorrect(String password, BCryptPasswordEncoder passwordEncoder) {
-        return passwordEncoder.matches(password, this.password);
+        return passwordEncoder.matches(this.password, password);
     }
 
 }

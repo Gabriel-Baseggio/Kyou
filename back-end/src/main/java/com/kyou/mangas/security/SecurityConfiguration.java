@@ -45,11 +45,11 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
         return http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/registro").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/usuario/login").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/usuario/registro").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/usuario").permitAll()
                         .anyRequest().authenticated())
                 .csrf(AbstractHttpConfigurer::disable)
                 .oauth2ResourceServer(conf -> conf.jwt(Customizer.withDefaults()))
