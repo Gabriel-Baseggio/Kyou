@@ -21,11 +21,4 @@ public class User {
 
     private String password;
 
-    @ManyToOne
-    private Role role;
-
-    public boolean isLoginCorrect(String password, BCryptPasswordEncoder passwordEncoder) {
-        return passwordEncoder.matches(this.password, password);
-    }
-
 }

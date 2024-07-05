@@ -18,13 +18,11 @@ public class UserService {
 
     private JwtService jwtService;
     private UserRepository userRepository;
-    private RoleService roleService;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public UserService(JwtService jwtService, UserRepository userRepository, RoleService roleService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserService(JwtService jwtService, UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.jwtService = jwtService;
         this.userRepository = userRepository;
-        this.roleService = roleService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
@@ -36,11 +34,15 @@ public class UserService {
         Optional<User> user = userRepository.findByUsername(userLogin.username());
 
 
-        if (user.isEmpty() || user.get().isLoginCorrect(userLogin.password(), bCryptPasswordEncoder)) {
+        if (user.isEmpty() || !this.validatePassword(userLogin, user.get())) {
             throw new BadCredentialsException("Usuário ou senha inválidos!");
         }
 
-        return new UserToken(jwtService.generateToken(userLogin));
+        return new UserToken(jwtService.generateToken(user.get()));
+    }
+
+    private boolean validatePassword(UserLogin userLogin, User user) {
+        return bCryptPasswordEncoder.matches(userLogin.password(), user.getPassword());
     }
 
     public void registerUser(UserRegister userRegister) {
@@ -48,7 +50,6 @@ public class UserService {
 
         user.setUsername(userRegister.username());
         user.setPassword(bCryptPasswordEncoder.encode(userRegister.password()));
-        user.setRole(roleService.findByName(userRegister.role()));
 
         userRepository.save(user);
     }
