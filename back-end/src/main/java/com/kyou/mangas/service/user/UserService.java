@@ -33,7 +33,6 @@ public class UserService {
     public UserToken login(UserLogin userLogin) {
         Optional<User> user = userRepository.findByUsername(userLogin.username());
 
-
         if (user.isEmpty() || !this.validatePassword(userLogin, user.get())) {
             throw new BadCredentialsException("Usuário ou senha inválidos!");
         }

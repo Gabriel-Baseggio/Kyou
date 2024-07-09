@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 
 import Header from "../components/header";
 import Footer from "@/components/footer";
+import { Toaster } from "@/components/ui/sonner";
 
 const outfit = Outfit({ subsets: ["latin"] });
 
@@ -32,7 +33,10 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          {children}
+          <main>
+            {children}
+            <Toaster duration={1000} expand richColors />
+          </main>
           <Footer />
         </ThemeProvider>
       </body>

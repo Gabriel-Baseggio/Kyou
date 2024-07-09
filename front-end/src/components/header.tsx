@@ -22,7 +22,7 @@ export default function Header() {
         </SheetClose>
         <SheetClose asChild>
           <Link
-            href="/catalogo"
+            href="/"
             className="flex items-center gap-2 text-base font-semibold md:text-base"
           >
             <BookCopy className="h-4 w-4" />
@@ -48,7 +48,7 @@ export default function Header() {
           Kyou
         </Link>
         <Link
-          href="/catalogo"
+          href="/"
           className="flex items-center gap-2 text-lg font-semibold md:text-base"
         >
           <BookCopy className="h-4 w-4 md:h-6 md:w-6" />
