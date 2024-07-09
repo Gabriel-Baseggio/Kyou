@@ -56,7 +56,6 @@ public class SecurityConfiguration {
                 .oauth2ResourceServer(conf -> conf.jwt(Customizer.withDefaults()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .build();
-
     }
 
     @Bean
