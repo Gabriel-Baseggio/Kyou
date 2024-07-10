@@ -13,7 +13,7 @@ export default function MangaPage({ params }: { params: { title: string } }) {
   let [readMore, setReadMore] = useState<boolean>(false);
 
   useEffect(() => {
-    fetchData(params.title).then((data) => {
+    fetchData("/" + params.title).then((data) => {
       setManga(data);
     });
   }, [params.title]);

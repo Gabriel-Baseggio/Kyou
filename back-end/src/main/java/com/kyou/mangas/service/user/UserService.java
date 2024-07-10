@@ -1,8 +1,8 @@
 package com.kyou.mangas.service.user;
 
-import com.kyou.mangas.controller.dto.UserLogin;
-import com.kyou.mangas.controller.dto.UserRegister;
-import com.kyou.mangas.controller.dto.UserToken;
+import com.kyou.mangas.controller.dto.UserLoginDTO;
+import com.kyou.mangas.controller.dto.UserRegisterDTO;
+import com.kyou.mangas.controller.dto.UserTokenDTO;
 import com.kyou.mangas.entity.user.User;
 import com.kyou.mangas.repository.user.UserRepository;
 import com.kyou.mangas.security.JwtService;
@@ -30,25 +30,25 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public UserToken login(UserLogin userLogin) {
-        Optional<User> user = userRepository.findByUsername(userLogin.username());
+    public UserTokenDTO login(UserLoginDTO userLoginDTO) {
+        Optional<User> user = userRepository.findByUsername(userLoginDTO.username());
 
-        if (user.isEmpty() || !this.validatePassword(userLogin, user.get())) {
+        if (user.isEmpty() || !this.validatePassword(userLoginDTO, user.get())) {
             throw new BadCredentialsException("Usuário ou senha inválidos!");
         }
 
-        return new UserToken(jwtService.generateToken(user.get()));
+        return jwtService.generateToken(user.get());
     }
 
-    private boolean validatePassword(UserLogin userLogin, User user) {
-        return bCryptPasswordEncoder.matches(userLogin.password(), user.getPassword());
+    private boolean validatePassword(UserLoginDTO userLoginDTO, User user) {
+        return bCryptPasswordEncoder.matches(userLoginDTO.password(), user.getPassword());
     }
 
-    public void registerUser(UserRegister userRegister) {
+    public void registerUser(UserRegisterDTO userRegisterDTO) {
         User user = new User();
 
-        user.setUsername(userRegister.username());
-        user.setPassword(bCryptPasswordEncoder.encode(userRegister.password()));
+        user.setUsername(userRegisterDTO.username());
+        user.setPassword(bCryptPasswordEncoder.encode(userRegisterDTO.password()));
 
         userRepository.save(user);
     }

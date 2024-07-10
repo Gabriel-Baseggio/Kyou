@@ -1,22 +1,40 @@
-import { fetchData } from "@/tools/api";
+"use server";
 
-export let isAuthenticated = false;
+import { fetchData } from "@/tools/api";
+import { addSeconds } from "date-fns";
+import { get } from "http";
+import { cookies } from "next/headers";
 
 export const login = async (username: string, password: string) => {
-  isAuthenticated = true;
-
-  return fetchData("usuario/login", {
+  let response = await fetchData("/usuario/login", {
     method: "POST",
     data: { username: username, password: password },
   })
     .then((data) => {
-      return "Usuário logado com sucesso";
+      cookies().set("token", data.token, {
+        expires: addSeconds(new Date(), data.expiresIn),
+      });
+      return { message: "Usuário logado com sucesso", error: undefined };
     })
     .catch((err) => {
-      throw new Error();
+      return { message: undefined, error: "Erro ao logar usuário" };
     });
+
+  return response;
 };
 
-export const logout = () => {
-  isAuthenticated = false;
+export const getCookie = async (name: string) => {
+  return cookies().get(name)?.value;
+};
+
+export const checkAuth = async () => {
+  if (cookies().get("token") != undefined) {
+    return true;
+  }
+  return false;
+};
+
+export const logout = async () => {
+  cookies().delete("token");
+  return;
 };

@@ -1,15 +1,11 @@
 package com.kyou.mangas.controller.user;
 
-import com.kyou.mangas.controller.dto.UserLogin;
-import com.kyou.mangas.controller.dto.UserRegister;
-import com.kyou.mangas.controller.dto.UserToken;
+import com.kyou.mangas.controller.dto.UserLoginDTO;
+import com.kyou.mangas.controller.dto.UserRegisterDTO;
 import com.kyou.mangas.entity.user.User;
 import com.kyou.mangas.service.user.UserService;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,13 +24,17 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<UserToken> login(@RequestBody UserLogin userLogin) {
-        return ResponseEntity.ok(userService.login(userLogin));
+    public ResponseEntity login(@RequestBody UserLoginDTO userLoginDTO) {
+        try {
+            return ResponseEntity.ok(userService.login(userLoginDTO));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @PostMapping("/registro")
-    public ResponseEntity<Void> register(@RequestBody UserRegister userRegister) {
-        userService.registerUser(userRegister);
+    public ResponseEntity<Void> register(@RequestBody UserRegisterDTO userRegisterDTO) {
+        userService.registerUser(userRegisterDTO);
         return ResponseEntity.ok().build();
     }
 

@@ -1,16 +1,20 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { isAuthenticated, logout } from "@/services/auth";
-import { redirect, useRouter } from "next/navigation";
+import { checkAuth, logout } from "@/services/auth";
+import { useRouter } from "next/navigation";
 import { useLayoutEffect } from "react";
 
 export default function PerfilPage() {
   const router = useRouter();
 
-  useLayoutEffect(() => {
-    if (!isAuthenticated) {
-      redirect("/login");
+  const checkCookies = async () => {
+    if (!(await checkAuth())) {
+      router.replace("/login");
     }
+  };
+
+  useLayoutEffect(() => {
+    checkCookies();
   }, []);
 
   const handleClick = () => {

@@ -25,14 +25,14 @@ export default function ChapterPage({
   const pathname = usePathname();
 
   useEffect(() => {
-    fetchData(params.title).then((data) => {
+    fetchData("/" + params.title).then((data) => {
       setManga(data);
       console.log(data);
     });
-    fetchData(params.title + "/" + params.chapter).then((data) => {
+    fetchData("/" + params.title + "/" + params.chapter).then((data) => {
       setChapter(data);
     });
-  }, [params.title]);
+  }, [params.chapter, params.title]);
 
   const formatPathname = (pathname: string) => {
     return pathname.split("/").slice(0, -1).join("/");

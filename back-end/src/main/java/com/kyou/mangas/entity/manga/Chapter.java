@@ -21,11 +21,8 @@ public class Chapter {
     private Double chapter;
 
     @ManyToOne
-    @Setter
-    @JsonBackReference
     private Manga manga;
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "chapter", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Page> pages;
 

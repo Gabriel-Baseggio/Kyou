@@ -18,8 +18,6 @@ public class Page {
 
     private String pageImage;
 
-    @JsonBackReference
     @ManyToOne
-    @Setter
     private Chapter chapter;
 }
