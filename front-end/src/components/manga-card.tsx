@@ -18,7 +18,12 @@ export default function MangaCard({ manga }: MangaCardProps) {
           className="absolute w-full h-full object-cover z-10 rounded-lg"
         ></img>
         <CardFooter className="relative z-30 flex flex-col items-start gap-8 bg-card rounded-b-lg p-5">
-          <CardTitle>{manga.title}</CardTitle>
+          <CardTitle
+            title={manga.title}
+            className="w-full min-h-12 line-clamp-2"
+          >
+            {manga.title}
+          </CardTitle>
           <div className="w-full flex justify-between">
             <p className="flex gap-2">
               <Star className="text-foreground" /> {manga.rating}

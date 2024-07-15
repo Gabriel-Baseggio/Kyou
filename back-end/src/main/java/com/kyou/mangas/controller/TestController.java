@@ -1,5 +1,7 @@
 package com.kyou.mangas.controller;
 
+import com.kyou.mangas.controller.dto.ChapterGetDTO;
+import com.kyou.mangas.controller.dto.MangaGetDTO;
 import com.kyou.mangas.entity.manga.Chapter;
 import com.kyou.mangas.entity.manga.Manga;
 import com.kyou.mangas.service.TestService;
@@ -20,17 +22,17 @@ public class TestController {
     private final TestService testService;
 
     @GetMapping
-    public ResponseEntity<List<Manga>> getMangas() {
+    public ResponseEntity<List<MangaGetDTO>> getMangas() {
         return ResponseEntity.ok(testService.getMangas());
     }
 
     @GetMapping("/{title}")
-    public ResponseEntity<Manga> getManga(@PathVariable String title) {
+    public ResponseEntity<MangaGetDTO> getManga(@PathVariable String title) {
         return ResponseEntity.ok(testService.getManga(title));
     }
 
     @GetMapping("/{title}/{chapterNumber}")
-    public ResponseEntity<Chapter> getChapterOfManga(@PathVariable String title, @PathVariable Double chapterNumber) {
+    public ResponseEntity<ChapterGetDTO> getChapterOfManga(@PathVariable String title, @PathVariable Double chapterNumber) {
         return ResponseEntity.ok(testService.getChapterOfManga(title, chapterNumber));
     }
 

@@ -16,6 +16,8 @@ export default function Home() {
   }, []);
 
   const showMangas = () => {
+    console.log(mangas);
+
     if (!mangas || mangas.length === 0) {
       return showSkeleton();
     }

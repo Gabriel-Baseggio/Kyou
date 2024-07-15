@@ -18,6 +18,8 @@ export default function RegistroPage() {
         method: "POST",
         data: { username: username, password: password },
       }).then((data) => {
+        console.log(data);
+
         toast.success("Usuário registrado com sucesso");
         router.replace("/login");
       });

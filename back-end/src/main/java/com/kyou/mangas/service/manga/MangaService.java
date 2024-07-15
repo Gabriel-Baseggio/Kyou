@@ -1,5 +1,8 @@
 package com.kyou.mangas.service.manga;
 
+import com.kyou.mangas.controller.dto.MangaCategoryGetDTO;
+import com.kyou.mangas.controller.dto.MangaChapterGetDTO;
+import com.kyou.mangas.controller.dto.MangaGetDTO;
 import com.kyou.mangas.entity.manga.Category;
 import com.kyou.mangas.entity.manga.Chapter;
 import com.kyou.mangas.entity.manga.Manga;
@@ -7,9 +10,7 @@ import com.kyou.mangas.repository.manga.MangaRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -20,8 +21,41 @@ public class MangaService {
     private final CategoryService categoryService;
     private final ChapterService chapterService;
 
-    public List<Manga> getMangas() {
-        return mangaRepository.findAll();
+    public List<MangaGetDTO> getMangas() {
+
+        List<Manga> mangas = mangaRepository.findAll();
+
+        List<MangaGetDTO> mangasDTOs = new ArrayList<>();
+
+        mangas.forEach(manga -> {
+            mangasDTOs.add(createMangaDTO(manga));
+        });
+
+        return mangasDTOs;
+    }
+
+    private MangaGetDTO createMangaDTO(Manga manga) {
+        return new MangaGetDTO(manga.getTitle(), manga.getCover(), manga.getBanner(), manga.getRating(), manga.getDescription(), manga.getStatus().name(), createCategoriesDTO(manga.getCategories()), createChaptersDTO(manga.getChapters()));
+    }
+
+    private Set<String> createCategoriesDTO(Set<Category> categories) {
+        Set<String> categoriesDTOs = new HashSet<>();
+
+        categories.forEach(category -> {
+            categoriesDTOs.add(category.getCategory());
+        });
+
+        return categoriesDTOs;
+    }
+
+    private List<Double> createChaptersDTO(List<Chapter> chapters) {
+        List<Double> chaptersDTOs = new ArrayList<>();
+
+        chapters.forEach(chapter -> {
+            chaptersDTOs.add(chapter.getChapter());
+        });
+
+        return chaptersDTOs;
     }
 
     public Manga getManga(Integer id) {
@@ -30,12 +64,15 @@ public class MangaService {
         if (optional.isEmpty())
             throw new RuntimeException("Mangá não encontrado");
 
-
-
         return optional.get();
     }
 
-    public Manga getManga(String title) {
+    public MangaGetDTO getMangaDTOByTitle(String title) {
+        Manga manga = mangaRepository.findByTitle(title);
+        return createMangaDTO(manga);
+    }
+
+    public Manga getMangaByTitle(String title) {
         return mangaRepository.findByTitle(title);
     }
 

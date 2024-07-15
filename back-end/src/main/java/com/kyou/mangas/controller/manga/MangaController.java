@@ -1,5 +1,6 @@
 package com.kyou.mangas.controller.manga;
 
+import com.kyou.mangas.controller.dto.MangaGetDTO;
 import com.kyou.mangas.entity.manga.Manga;
 import com.kyou.mangas.service.manga.MangaService;
 import lombok.AllArgsConstructor;
@@ -18,7 +19,7 @@ public class MangaController {
     private final MangaService mangaService;
 
     @GetMapping
-    public List<Manga> getMangas() {
+    public List<MangaGetDTO> getMangas() {
         return mangaService.getMangas();
     }
 
@@ -28,8 +29,8 @@ public class MangaController {
     }
 
     @GetMapping("/{title}")
-    public ResponseEntity<Manga> getManga(@PathVariable String title) {
-        return ResponseEntity.ok(mangaService.getManga(title));
+    public ResponseEntity<MangaGetDTO> getManga(@PathVariable String title) {
+        return ResponseEntity.ok(mangaService.getMangaDTOByTitle(title));
     }
 
     @PostMapping

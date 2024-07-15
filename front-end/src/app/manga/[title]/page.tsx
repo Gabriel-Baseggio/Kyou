@@ -14,6 +14,8 @@ export default function MangaPage({ params }: { params: { title: string } }) {
 
   useEffect(() => {
     fetchData("/" + params.title).then((data) => {
+      console.log(data);
+
       setManga(data);
     });
   }, [params.title]);
