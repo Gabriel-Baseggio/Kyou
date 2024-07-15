@@ -25,11 +25,11 @@ export default function ChapterPage({
   const pathname = usePathname();
 
   useEffect(() => {
-    fetchData("/" + params.title).then((data) => {
+    fetchData("/kyou/" + params.title).then((data) => {
       setManga(data);
       console.log(data);
     });
-    fetchData("/" + params.title + "/" + params.chapter).then((data) => {
+    fetchData("/kyou/" + params.title + "/" + params.chapter).then((data) => {
       setChapter(data);
     });
   }, [params.chapter, params.title]);

@@ -10,7 +10,7 @@ export default function Home() {
   const [mangas, setMangas] = useState<Manga[] | null>(null);
 
   useEffect(() => {
-    fetchData("/manga").then((data) => {
+    fetchData("/kyou").then((data) => {
       setMangas(data);
     });
   }, []);

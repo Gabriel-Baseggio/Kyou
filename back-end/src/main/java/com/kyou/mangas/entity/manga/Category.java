@@ -19,10 +19,4 @@ public class Category {
     @Column(nullable = false)
     private String category;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Manga> mangas;
-
-    public void addManga(Manga manga){
-        this.mangas.add(manga);
-    }
 }

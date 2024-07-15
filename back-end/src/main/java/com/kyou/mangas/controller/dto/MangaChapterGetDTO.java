@@ -1,4 +1,6 @@
 package com.kyou.mangas.controller.dto;
 
-public record MangaChapterGetDTO(Double chapter) {
+import java.util.List;
+
+public record MangaChapterGetDTO(Double chapter, List<PageGetDTO> pages) {
 }

@@ -35,15 +35,11 @@ public class Manga {
     @Enumerated
     private Status status;
 
-    @ManyToMany(mappedBy = "mangas", cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     private Set<Category> categories;
 
     @OneToMany(mappedBy = "manga", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Chapter> chapters;
-
-    public void addCategory(Category category) {
-        this.categories.add(category);
-    }
 
     public void addChapter(Chapter chapter) {
         this.chapters.add(chapter);

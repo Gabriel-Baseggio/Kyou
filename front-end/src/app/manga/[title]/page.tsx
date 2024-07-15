@@ -13,7 +13,7 @@ export default function MangaPage({ params }: { params: { title: string } }) {
   let [readMore, setReadMore] = useState<boolean>(false);
 
   useEffect(() => {
-    fetchData("/" + params.title).then((data) => {
+    fetchData("/kyou/" + params.title).then((data) => {
       console.log(data);
 
       setManga(data);

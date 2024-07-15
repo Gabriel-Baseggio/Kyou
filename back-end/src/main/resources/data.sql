@@ -71,7 +71,7 @@ VALUES ('https://i.pinimg.com/550x/41/9e/e4/419ee450efadeb511bd4cc19959e2315.jpg
         8.2, 1, 'Fairy Tail',
         'https://i.pinimg.com/originals/e8/3b/1c/e83b1c946b8a49ab36a3a5f771c3da7a.jpg');
 
-INSERT IGNORE INTO category_mangas (categories_id, mangas_id)
+INSERT IGNORE INTO manga_categories (categories_id, manga_id)
 VALUES
 -- Solo Leveling
 (1, 1),

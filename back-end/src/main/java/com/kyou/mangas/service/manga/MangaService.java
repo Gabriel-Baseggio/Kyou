@@ -3,9 +3,11 @@ package com.kyou.mangas.service.manga;
 import com.kyou.mangas.controller.dto.MangaCategoryGetDTO;
 import com.kyou.mangas.controller.dto.MangaChapterGetDTO;
 import com.kyou.mangas.controller.dto.MangaGetDTO;
+import com.kyou.mangas.controller.dto.PageGetDTO;
 import com.kyou.mangas.entity.manga.Category;
 import com.kyou.mangas.entity.manga.Chapter;
 import com.kyou.mangas.entity.manga.Manga;
+import com.kyou.mangas.entity.manga.Page;
 import com.kyou.mangas.repository.manga.MangaRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -38,24 +40,34 @@ public class MangaService {
         return new MangaGetDTO(manga.getTitle(), manga.getCover(), manga.getBanner(), manga.getRating(), manga.getDescription(), manga.getStatus().name(), createCategoriesDTO(manga.getCategories()), createChaptersDTO(manga.getChapters()));
     }
 
-    private Set<String> createCategoriesDTO(Set<Category> categories) {
-        Set<String> categoriesDTOs = new HashSet<>();
+    private Set<MangaCategoryGetDTO> createCategoriesDTO(Set<Category> categories) {
+        Set<MangaCategoryGetDTO> categoriesDTOs = new HashSet<>();
 
         categories.forEach(category -> {
-            categoriesDTOs.add(category.getCategory());
+            categoriesDTOs.add(new MangaCategoryGetDTO(category.getCategory()));
         });
 
         return categoriesDTOs;
     }
 
-    private List<Double> createChaptersDTO(List<Chapter> chapters) {
-        List<Double> chaptersDTOs = new ArrayList<>();
+    private List<MangaChapterGetDTO> createChaptersDTO(List<Chapter> chapters) {
+        List<MangaChapterGetDTO> chaptersDTOs = new ArrayList<>();
 
         chapters.forEach(chapter -> {
-            chaptersDTOs.add(chapter.getChapter());
+            chaptersDTOs.add(new MangaChapterGetDTO(chapter.getChapter(), createPagesDTO(chapter.getPages())));
         });
 
         return chaptersDTOs;
+    }
+
+    private List<PageGetDTO> createPagesDTO(List<Page> pages) {
+        List<PageGetDTO> pagesDTOs = new ArrayList<>();
+
+        pages.forEach(page -> {
+            pagesDTOs.add(new PageGetDTO(page.getNumber(), page.getPageImage()));
+        });
+
+        return pagesDTOs;
     }
 
     public Manga getManga(Integer id) {
@@ -104,13 +116,9 @@ public class MangaService {
     public Manga addCategories(Integer mangaId, Set<Integer> categoriesId) {
         Manga manga = getManga(mangaId);
 
-        for (Integer categoryId: categoriesId) {
+        for (Integer categoryId : categoriesId) {
             Category category = categoryService.getCategory(categoryId);
-
-            category.addManga(manga);
-            categoryService.updateCategory(category);
-
-            manga.addCategory(category);
+            manga.getCategories().add(category);
         }
 
         return updateManga(manga);
@@ -119,7 +127,7 @@ public class MangaService {
     public Manga addChapters(Integer mangaId, Set<Integer> chaptersId) {
         Manga manga = getManga(mangaId);
 
-        for (Integer chapterId: chaptersId) {
+        for (Integer chapterId : chaptersId) {
             Chapter chapter = chapterService.getChapter(chapterId);
 
             chapter.setManga(manga);

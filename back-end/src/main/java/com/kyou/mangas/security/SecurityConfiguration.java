@@ -51,6 +51,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST,"/usuario/login").permitAll()
                         .requestMatchers(HttpMethod.POST,"/usuario/registro").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/kyou/**").permitAll()
                         .anyRequest().authenticated())
                 .csrf(AbstractHttpConfigurer::disable)
                 .oauth2ResourceServer(conf -> conf.jwt(Customizer.withDefaults()))

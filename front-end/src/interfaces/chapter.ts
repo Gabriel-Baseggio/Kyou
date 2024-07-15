@@ -3,6 +3,5 @@ import { Page } from "./page";
 
 export interface Chapter {
   chapter: number;
-  manga: Manga;
   pages: Page[];
 }
