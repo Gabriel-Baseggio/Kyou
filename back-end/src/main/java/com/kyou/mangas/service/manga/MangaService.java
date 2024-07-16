@@ -10,6 +10,7 @@ import com.kyou.mangas.entity.manga.Manga;
 import com.kyou.mangas.entity.manga.Page;
 import com.kyou.mangas.repository.manga.MangaRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -30,44 +31,15 @@ public class MangaService {
         List<MangaGetDTO> mangasDTOs = new ArrayList<>();
 
         mangas.forEach(manga -> {
-            mangasDTOs.add(createMangaDTO(manga));
+            mangasDTOs.add(manga.toDTO());
         });
 
         return mangasDTOs;
     }
 
-    private MangaGetDTO createMangaDTO(Manga manga) {
-        return new MangaGetDTO(manga.getTitle(), manga.getCover(), manga.getBanner(), manga.getRating(), manga.getDescription(), manga.getStatus().name(), createCategoriesDTO(manga.getCategories()), createChaptersDTO(manga.getChapters()));
-    }
-
-    private Set<MangaCategoryGetDTO> createCategoriesDTO(Set<Category> categories) {
-        Set<MangaCategoryGetDTO> categoriesDTOs = new HashSet<>();
-
-        categories.forEach(category -> {
-            categoriesDTOs.add(new MangaCategoryGetDTO(category.getCategory()));
-        });
-
-        return categoriesDTOs;
-    }
-
-    private List<MangaChapterGetDTO> createChaptersDTO(List<Chapter> chapters) {
-        List<MangaChapterGetDTO> chaptersDTOs = new ArrayList<>();
-
-        chapters.forEach(chapter -> {
-            chaptersDTOs.add(new MangaChapterGetDTO(chapter.getChapter(), createPagesDTO(chapter.getPages())));
-        });
-
-        return chaptersDTOs;
-    }
-
-    private List<PageGetDTO> createPagesDTO(List<Page> pages) {
-        List<PageGetDTO> pagesDTOs = new ArrayList<>();
-
-        pages.forEach(page -> {
-            pagesDTOs.add(new PageGetDTO(page.getNumber(), page.getPageImage()));
-        });
-
-        return pagesDTOs;
+    public org.springframework.data.domain.Page<MangaGetDTO> getMangasDTOPage(Pageable pageable) {
+        org.springframework.data.domain.Page<Manga> mangasPage = mangaRepository.findAll(pageable);
+        return mangasPage.map(Manga::toDTO);
     }
 
     public Manga getManga(Integer id) {
@@ -81,7 +53,7 @@ public class MangaService {
 
     public MangaGetDTO getMangaDTOByTitle(String title) {
         Manga manga = mangaRepository.findByTitle(title);
-        return createMangaDTO(manga);
+        return manga.toDTO();
     }
 
     public Manga getMangaByTitle(String title) {
@@ -138,4 +110,5 @@ public class MangaService {
 
         return updateManga(manga);
     }
+
 }

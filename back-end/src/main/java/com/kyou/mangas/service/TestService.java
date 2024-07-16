@@ -10,6 +10,7 @@ import com.kyou.mangas.entity.manga.Page;
 import com.kyou.mangas.service.manga.ChapterService;
 import com.kyou.mangas.service.manga.MangaService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -30,6 +31,10 @@ public class TestService {
 
     public MangaGetDTO getManga(String title) {
         return mangaService.getMangaDTOByTitle(title);
+    }
+
+    public org.springframework.data.domain.Page<MangaGetDTO> getMangasPage(Pageable pageable) {
+        return mangaService.getMangasDTOPage(pageable);
     }
 
     public ChapterGetDTO getChapterOfManga(String title, Double chapterNumber) {
@@ -61,4 +66,6 @@ public class TestService {
         }
         return null;
     }
+
+
 }

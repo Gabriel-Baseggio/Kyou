@@ -1,10 +1,13 @@
 package com.kyou.mangas.entity.manga;
 
+import com.kyou.mangas.controller.dto.MangaChapterGetDTO;
+import com.kyou.mangas.controller.dto.PageGetDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,5 +31,12 @@ public class Chapter {
 
     public void addPage(Page page) {
         this.pages.add(page);
+    }
+
+    public MangaChapterGetDTO toDTO() {
+
+        List<PageGetDTO> pages = this.pages.stream().map(Page::toDTO).toList();
+
+        return new MangaChapterGetDTO(this.chapter, pages);
     }
 }

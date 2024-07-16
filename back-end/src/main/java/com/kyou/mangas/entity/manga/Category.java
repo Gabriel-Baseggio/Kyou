@@ -1,6 +1,7 @@
 package com.kyou.mangas.entity.manga;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.kyou.mangas.controller.dto.MangaCategoryGetDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,4 +20,7 @@ public class Category {
     @Column(nullable = false)
     private String category;
 
+    public MangaCategoryGetDTO toDTO() {
+        return new MangaCategoryGetDTO(this.category);
+    }
 }

@@ -1,6 +1,7 @@
 package com.kyou.mangas.entity.manga;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.kyou.mangas.controller.dto.PageGetDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,4 +21,8 @@ public class Page {
 
     @ManyToOne
     private Chapter chapter;
+
+    public PageGetDTO toDTO() {
+        return new PageGetDTO(this.number, this.pageImage);
+    }
 }

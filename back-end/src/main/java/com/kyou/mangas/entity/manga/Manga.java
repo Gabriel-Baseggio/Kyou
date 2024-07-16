@@ -1,9 +1,14 @@
 package com.kyou.mangas.entity.manga;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.kyou.mangas.controller.dto.MangaCategoryGetDTO;
+import com.kyou.mangas.controller.dto.MangaChapterGetDTO;
+import com.kyou.mangas.controller.dto.MangaGetDTO;
+import com.kyou.mangas.controller.dto.PageGetDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -43,5 +48,16 @@ public class Manga {
 
     public void addChapter(Chapter chapter) {
         this.chapters.add(chapter);
+    }
+
+    public MangaGetDTO toDTO() {
+        Set<MangaCategoryGetDTO> categories = new HashSet<>();
+        for (Category category : this.categories) {
+            categories.add(category.toDTO());
+        }
+
+        List<MangaChapterGetDTO> chapters = this.chapters.stream().map(Chapter::toDTO).toList();
+
+        return new MangaGetDTO(this.title, this.cover, this.banner, this.rating, this.description, this.status.name(), categories, chapters);
     }
 }

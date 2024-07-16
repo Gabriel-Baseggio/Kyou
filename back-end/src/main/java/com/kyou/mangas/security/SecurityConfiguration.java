@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -31,6 +32,7 @@ import java.security.interfaces.RSAPublicKey;
 
 @Configuration
 @EnableWebSecurity
+@EnableSpringDataWebSupport(pageSerializationMode = EnableSpringDataWebSupport.PageSerializationMode.VIA_DTO)
 @EnableMethodSecurity
 @NoArgsConstructor
 public class SecurityConfiguration {
@@ -51,7 +53,13 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST,"/usuario/login").permitAll()
                         .requestMatchers(HttpMethod.POST,"/usuario/registro").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/kyou/").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/kyou/pageable").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/kyou/{title}").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/kyou/{title}/{chapterNumber}").permitAll()
                         .requestMatchers(HttpMethod.GET,"/kyou/**").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/kyou/**/**").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/kyou/**/**/**").permitAll()
                         .anyRequest().authenticated())
                 .csrf(AbstractHttpConfigurer::disable)
                 .oauth2ResourceServer(conf -> conf.jwt(Customizer.withDefaults()))

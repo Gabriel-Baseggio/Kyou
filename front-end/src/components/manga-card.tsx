@@ -17,7 +17,7 @@ export default function MangaCard({ manga }: MangaCardProps) {
           alt={manga.title + " cover"}
           className="absolute w-full h-full object-cover z-10 rounded-lg"
         ></img>
-        <CardFooter className="relative z-30 flex flex-col items-start gap-8 bg-card rounded-b-lg p-5">
+        <CardFooter className="relative z-30 flex flex-col items-start gap-4 bg-card rounded-b-lg p-5">
           <CardTitle
             title={manga.title}
             className="w-full min-h-12 line-clamp-2"
