@@ -57,30 +57,79 @@ export default function Home() {
     return skeletons.map((skeleton) => skeleton);
   };
 
+  const showPaginationItems = () => {
+    let items = [];
+
+    let totalPages = pageInfo!.totalPages;
+    let qtdPagesCadaParte = totalPages / 2;
+
+    if (qtdPagesCadaParte > 3) {
+      qtdPagesCadaParte = 3;
+    }
+
+    for (let i = 0; i < qtdPagesCadaParte; i++) {
+      items.push(
+        <PaginationItem>
+          <PaginationLink
+            onClick={paginateTo(i)}
+            isActive={pageInfo?.number == i}
+          >
+            {i + 1}
+          </PaginationLink>
+        </PaginationItem>
+      );
+    }
+
+    if (qtdPagesCadaParte == 3) {
+      items.push(
+        <PaginationItem>
+          <PaginationEllipsis />
+        </PaginationItem>
+      );
+    }
+
+    for (let i = totalPages - 4; i < qtdPagesCadaParte; i++) {
+      items.push(
+        <PaginationItem>
+          <PaginationLink
+            onClick={paginateTo(i)}
+            isActive={pageInfo?.number == i}
+          >
+            {i + 1}
+          </PaginationLink>
+        </PaginationItem>
+      );
+    }
+
+    return items.map((item) => item);
+  };
+
   const paginateTo = (page: number) => async () => {
-    fetchMangaPageable(page);
+    if ((pageInfo?.totalPages || 0) - 1 >= page) {
+      fetchMangaPageable(page);
+    }
   };
 
   return (
     <main>
       <div className="w-full px-16 py-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {showMangas()}
-        <Pagination>
+        <div className="grid grid-cols-subgrid col-span-full row-span-1 gap-4">
+          {showMangas()}
+        </div>
+        <Pagination className="col-span-full row-span-1 flex items-center justify-center">
           <PaginationContent>
             <PaginationItem>
-              <PaginationPrevious href="#" />
+              <PaginationPrevious
+                disabled={pageInfo?.number == 0}
+                onClick={paginateTo((pageInfo?.number || 0) - 1)}
+              />
             </PaginationItem>
+            {showPaginationItems()}
             <PaginationItem>
-              <PaginationLink onClick={paginateTo(0)}>1</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink onClick={paginateTo(1)}>2</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationEllipsis />
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationNext href="#" />
+              <PaginationNext
+                disabled={pageInfo?.number == (pageInfo?.totalPages || 1) - 1}
+                onClick={paginateTo((pageInfo?.number || 0) + 1)}
+              />
             </PaginationItem>
           </PaginationContent>
         </Pagination>

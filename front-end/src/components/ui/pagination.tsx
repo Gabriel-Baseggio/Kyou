@@ -36,12 +36,14 @@ PaginationItem.displayName = "PaginationItem";
 
 type PaginationLinkProps = {
   isActive?: boolean;
+  disabled?: boolean;
 } & Pick<ButtonProps, "size"> &
   React.ComponentProps<"a">;
 
 const PaginationLink = ({
   className,
   isActive,
+  disabled,
   size = "icon",
   ...props
 }: PaginationLinkProps) => (
@@ -52,6 +54,9 @@ const PaginationLink = ({
         variant: isActive ? "outline" : "ghost",
         size,
       }),
+      disabled
+        ? "text-muted hover:cursor-auto hover:text-muted hover:bg-transparent active:scale-100 select-none"
+        : "",
       className
     )}
     {...props}
@@ -66,6 +71,7 @@ const PaginationPrevious = ({
   <PaginationLink
     aria-label="Go to previous page"
     size="default"
+    disabled
     className={cn("gap-1 pl-2.5", className)}
     {...props}
   >
