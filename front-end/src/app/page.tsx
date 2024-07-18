@@ -28,12 +28,14 @@ export default function Home() {
     if (page == undefined) {
       page = 0;
     }
-    fetchData(`/kyou/pageable?page=${page}`).then((data) => {
-      console.log(data);
+    fetchData(`/kyou/pageable?page=${page}&size=1`, { method: "GET" }).then(
+      (data) => {
+        console.log(data);
 
-      setMangas(data.content);
-      setPageInfo(data.page);
-    });
+        setMangas(data.content);
+        setPageInfo(data.page);
+      }
+    );
   };
 
   const showMangas = () => {
@@ -60,16 +62,40 @@ export default function Home() {
   const showPaginationItems = () => {
     let items = [];
 
-    let totalPages = pageInfo!.totalPages;
-    let qtdPagesCadaParte = totalPages / 2;
+    let pageNumber = pageInfo?.number || 0;
+    let totalPages = pageInfo?.totalPages || 1;
 
-    if (qtdPagesCadaParte > 3) {
-      qtdPagesCadaParte = 3;
+    let startingPage = pageNumber - 2;
+
+    let lastPageToShow = pageNumber + 3;
+
+    if (pageNumber <= 1) {
+      if (pageNumber == 0) {
+        lastPageToShow += 2;
+      } else {
+        lastPageToShow += 1;
+      }
+    } else if (pageNumber >= totalPages - 2) {
+      if (pageNumber == totalPages - 1) {
+        startingPage -= 2;
+      } else {
+        startingPage -= 1;
+      }
     }
 
-    for (let i = 0; i < qtdPagesCadaParte; i++) {
+    console.log("startingPage", startingPage);
+    console.log("lastPageToShow", lastPageToShow);
+
+    let key = 0;
+    if (pageNumber >= totalPages / 2) {
+      key = 2;
+    }
+    for (let i = startingPage; i < lastPageToShow; i++) {
+      if (i < 0 || i >= totalPages) {
+        continue;
+      }
       items.push(
-        <PaginationItem>
+        <PaginationItem key={key}>
           <PaginationLink
             onClick={paginateTo(i)}
             isActive={pageInfo?.number == i}
@@ -78,24 +104,38 @@ export default function Home() {
           </PaginationLink>
         </PaginationItem>
       );
+      key++;
     }
 
-    if (qtdPagesCadaParte == 3) {
+    if (pageNumber < totalPages / 2) {
       items.push(
-        <PaginationItem>
+        <PaginationItem key={4}>
           <PaginationEllipsis />
         </PaginationItem>
       );
-    }
-
-    for (let i = totalPages - 4; i < qtdPagesCadaParte; i++) {
       items.push(
-        <PaginationItem>
+        <PaginationItem key={5}>
           <PaginationLink
-            onClick={paginateTo(i)}
-            isActive={pageInfo?.number == i}
+            onClick={paginateTo(totalPages - 1)}
+            isActive={pageInfo?.number == totalPages - 1}
           >
-            {i + 1}
+            {totalPages}
+          </PaginationLink>
+        </PaginationItem>
+      );
+    } else {
+      items.unshift(
+        <PaginationItem key={1}>
+          <PaginationEllipsis />
+        </PaginationItem>
+      );
+      items.unshift(
+        <PaginationItem key={0}>
+          <PaginationLink
+            onClick={paginateTo(0)}
+            isActive={pageInfo?.number == 0}
+          >
+            {1}
           </PaginationLink>
         </PaginationItem>
       );

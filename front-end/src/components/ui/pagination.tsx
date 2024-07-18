@@ -54,8 +54,9 @@ const PaginationLink = ({
         variant: isActive ? "outline" : "ghost",
         size,
       }),
+      "select-none",
       disabled
-        ? "text-muted hover:cursor-auto hover:text-muted hover:bg-transparent active:scale-100 select-none"
+        ? "text-muted hover:cursor-auto hover:text-muted hover:bg-transparent active:scale-100"
         : "",
       className
     )}
