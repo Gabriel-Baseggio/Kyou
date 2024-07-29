@@ -1,6 +1,7 @@
 "use client";
 
 import MangaCard from "@/components/manga-card";
+import { Button } from "@/components/ui/button";
 import {
   Pagination,
   PaginationContent,
@@ -10,6 +11,15 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Manga } from "@/interfaces/manga";
 import { PageInfo } from "@/interfaces/page-info";
@@ -19,23 +29,36 @@ import { useState, useEffect } from "react";
 export default function Home() {
   const [mangas, setMangas] = useState<Manga[] | null>(null);
   const [pageInfo, setPageInfo] = useState<PageInfo | null>(null);
+  const [orderBy, setOrderBy] = useState<string>("rating");
+  const [direction, setDirection] = useState<string>("DESC");
 
   useEffect(() => {
     fetchMangaPageable();
   }, []);
 
-  const fetchMangaPageable = async (page?: number) => {
-    if (page == undefined) {
-      page = 0;
-    }
-    fetchData(`/kyou/pageable?page=${page}&size=1`, { method: "GET" }).then(
-      (data) => {
-        console.log(data);
+  useEffect(() => {
+    fetchMangaPageable(orderBy);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [orderBy]);
 
-        setMangas(data.content);
-        setPageInfo(data.page);
-      }
-    );
+  useEffect(() => {
+    fetchMangaPageable(orderBy, pageInfo?.number, direction);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [direction]);
+
+  const fetchMangaPageable = async (
+    order: string = orderBy,
+    page: number = pageInfo?.number || 0,
+    dir: string = "ASC"
+  ) => {
+    fetchData(`/kyou/pageable?page=${page}&sort=${order},${dir}`, {
+      method: "GET",
+    }).then((data) => {
+      console.log(data);
+
+      setMangas(data.content);
+      setPageInfo(data.page);
+    });
   };
 
   const showMangas = () => {
@@ -83,9 +106,6 @@ export default function Home() {
       }
     }
 
-    console.log("startingPage", startingPage);
-    console.log("lastPageToShow", lastPageToShow);
-
     let key = 0;
     if (pageNumber >= totalPages / 2) {
       key = 2;
@@ -107,7 +127,7 @@ export default function Home() {
       key++;
     }
 
-    if (pageNumber < totalPages / 2) {
+    if (totalPages > 5 && pageNumber < totalPages / 2) {
       items.push(
         <PaginationItem key={4}>
           <PaginationEllipsis />
@@ -123,7 +143,7 @@ export default function Home() {
           </PaginationLink>
         </PaginationItem>
       );
-    } else {
+    } else if (totalPages > 5 && pageNumber >= totalPages / 2) {
       items.unshift(
         <PaginationItem key={1}>
           <PaginationEllipsis />
@@ -153,6 +173,33 @@ export default function Home() {
   return (
     <main>
       <div className="w-full px-16 py-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <h1 className="col-span-1 row-span-1 text-2xl font-bold">
+          Catálogo de obras
+        </h1>
+
+        <div className="-col-start-2 col-span-1 row-span-1 flex justify-between">
+          <Select onValueChange={setOrderBy} autoComplete="true">
+            <SelectTrigger className="w-3/4">
+              <SelectValue placeholder="Ordenar por" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem value="rating">Avaliação</SelectItem>
+                <SelectItem value="title">Título</SelectItem>
+                <SelectItem value="status">Status</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+
+          <Button
+            onClick={() =>
+              direction == "ASC" ? setDirection("DESC") : setDirection("ASC")
+            }
+          >
+            {direction}
+          </Button>
+        </div>
+
         <div className="grid grid-cols-subgrid col-span-full row-span-1 gap-4">
           {showMangas()}
         </div>

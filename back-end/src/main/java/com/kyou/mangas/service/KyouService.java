@@ -1,7 +1,6 @@
 package com.kyou.mangas.service;
 
 import com.kyou.mangas.controller.dto.ChapterGetDTO;
-import com.kyou.mangas.controller.dto.MangaChapterGetDTO;
 import com.kyou.mangas.controller.dto.MangaGetDTO;
 import com.kyou.mangas.controller.dto.PageGetDTO;
 import com.kyou.mangas.entity.manga.Chapter;
@@ -19,7 +18,7 @@ import java.util.Objects;
 
 @Service
 @AllArgsConstructor
-public class TestService {
+public class KyouService {
 
     private final MangaService mangaService;
 

@@ -23,7 +23,7 @@ VALUES ('Ação'),
 INSERT IGNORE INTO manga (cover, description, rating, status, title, banner)
 VALUES ('https://i.pinimg.com/550x/41/9e/e4/419ee450efadeb511bd4cc19959e2315.jpg',
         'Em um mundo onde seres despertos chamados “Caçadores” devem lutar contra monstros mortais para proteger a humanidade, Sung Jinwoo, apelidado de “o caçador mais fraco de toda a humanidade”, encontra-se em uma luta constante pela sobrevivência. Um dia, após um encontro brutal em uma masmorra dominada acabar com seu grupo e ameaçar acabar com sua vida, um misterioso Sistema o escolhe como seu único jogador: Jinwoo teve a rara oportunidade de aumentar suas habilidades, possivelmente além de qualquer limite conhecido. . Acompanhe a jornada de Jinwoo enquanto ele enfrenta inimigos cada vez mais fortes, tanto humanos quanto monstros, para descobrir os segredos das masmorras e a extensão máxima de seus poderes.',
-        9.53, 1, 'Solo Leveling',
+        9.53, 0, 'Solo Leveling',
         'https://i.pinimg.com/originals/72/32/48/723248ff940536c792b03f02128e64fe.jpg'),
 
        ('https://i.pinimg.com/736x/b7/08/e5/b708e5f64a32e8c3bd522581af5c2f4a.jpg',
@@ -33,17 +33,17 @@ VALUES ('https://i.pinimg.com/550x/41/9e/e4/419ee450efadeb511bd4cc19959e2315.jpg
 
        ('https://i.pinimg.com/originals/c8/41/e7/c841e78626b3cf416ce1bc185e1543f6.png',
         'Midoriya Izuku é um garoto que nasceu sem individualidade em um mundo onde 80% da população possui superpoderes. Seu sonho é se tornar um herói como seu ídolo All Might, e sua vida muda quando ele recebe a oportunidade de herdar o poder de All Might.',
-        8.5, 1, 'Boku no Hero Academia',
+        8.5, 2, 'Boku no Hero Academia',
         'https://i.pinimg.com/originals/1c/4c/c9/1c4cc9efe4fdd49c67647d72634f339f.png'),
 
        ('https://i.pinimg.com/originals/54/b0/12/54b012a9f78da0756ac9e13cf195ecac.png',
         'Tanjirou Kamado é um garoto bondoso que vive com sua família nas montanhas. Um dia, ele descobre que toda sua família foi massacrada por demônios, exceto sua irmã Nezuko, que foi transformada em um demônio. Determinado a encontrar uma cura para Nezuko, Tanjirou se torna um caçador de demônios.',
-        9.1, 1, 'Kimetsu no Yaiba',
+        9.1, 3, 'Kimetsu no Yaiba',
         'https://i.pinimg.com/originals/c9/05/be/c905be73748929cbb3644cf9b4361043.jpg'),
 
        ('https://i.pinimg.com/736x/7b/c8/c9/7bc8c9488719bd7e9c65e1de6f0d6e10.jpg',
         'Um estudante do ensino médio chamado Saitama se torna um herói por diversão. Após treinar intensamente por três anos, ele se torna tão forte que pode derrotar qualquer inimigo com um único soco. No entanto, ele se sente entediado e busca encontrar um adversário digno.',
-        8.8, 1, 'One Punch Man',
+        8.8, 0, 'One Punch Man',
         'https://i.pinimg.com/736x/d2/ed/8b/d2ed8b03fae023088a94a7e7319746f5.jpg'),
 
        ('https://i.pinimg.com/originals/35/3c/9b/353c9b52f212ada10fa6fb051095b1cb.jpg',
@@ -53,17 +53,17 @@ VALUES ('https://i.pinimg.com/550x/41/9e/e4/419ee450efadeb511bd4cc19959e2315.jpg
 
        ('https://i.pinimg.com/originals/a1/81/7b/a1817b7fc36baa21a9799daaea6b1952.jpg',
         'Eren Yeager vive em uma cidade cercada por muralhas gigantes que protegem a humanidade de titãs devoradores de homens. Após a destruição de sua cidade e a morte de sua mãe, Eren se junta ao Exército para combater os titãs e descobrir os segredos de sua origem.',
-        8.9, 1, 'Shingeki no Kyojin',
+        8.9, 2, 'Shingeki no Kyojin',
         'https://i.pinimg.com/originals/5b/26/26/5b262629a153363a7f0e150a6ca9dffb.png'),
 
        ('https://i.pinimg.com/564x/cc/71/7e/cc717e351775acc5516b75176aead137.jpg',
         'Naruto Uzumaki é um jovem ninja que busca reconhecimento e sonha em se tornar Hokage, o líder de sua vila. Apesar de ser desprezado por carregar dentro de si a Raposa de Nove Caudas, uma poderosa criatura que atacou a vila no passado, Naruto nunca desiste e faz muitos amigos ao longo de sua jornada.',
-        8.1, 1, 'Naruto',
+        8.1, 3, 'Naruto',
         'https://i.pinimg.com/originals/fa/3a/6c/fa3a6cb112638bdda62973e635349fdc.png'),
 
        ('https://i.pinimg.com/736x/62/80/e5/6280e51826b7e5229f8af779d578b6ae.jpg',
         'Light Yagami é um estudante brilhante que encontra um caderno sobrenatural chamado "Death Note". Qualquer pessoa cujo nome seja escrito no caderno morrerá. Light decide usar o Death Note para purgar o mundo de criminosos e se tornar o "deus" de um novo mundo. No entanto, um detetive misterioso conhecido apenas como "L" se torna seu adversário.',
-        8.7, 1, 'Death Note',
+        8.7, 0, 'Death Note',
         'https://i.pinimg.com/originals/29/19/55/2919556995b7c6ba83d6c86ded9c37cc.jpg'),
 
        ('https://i.pinimg.com/736x/67/e5/ef/67e5ef8b2b104ad230c31ec49f65e4ce.jpg',
