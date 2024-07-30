@@ -24,6 +24,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Manga } from "@/interfaces/manga";
 import { PageInfo } from "@/interfaces/page-info";
 import { fetchData } from "@/tools/api";
+import { ArrowDownWideNarrow, ArrowUpWideNarrow } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export default function Home() {
@@ -49,7 +50,7 @@ export default function Home() {
   const fetchMangaPageable = async (
     order: string = orderBy,
     page: number = pageInfo?.number || 0,
-    dir: string = "ASC"
+    dir: string = direction
   ) => {
     fetchData(`/kyou/pageable?page=${page}&sort=${order},${dir}`, {
       method: "GET",
@@ -166,7 +167,7 @@ export default function Home() {
 
   const paginateTo = (page: number) => async () => {
     if ((pageInfo?.totalPages || 0) - 1 >= page) {
-      fetchMangaPageable(page);
+      fetchMangaPageable(orderBy, page);
     }
   };
 
@@ -192,11 +193,16 @@ export default function Home() {
           </Select>
 
           <Button
+            variant="outline"
             onClick={() =>
               direction == "ASC" ? setDirection("DESC") : setDirection("ASC")
             }
           >
-            {direction}
+            {direction == "ASC" ? (
+              <ArrowUpWideNarrow></ArrowUpWideNarrow>
+            ) : (
+              <ArrowDownWideNarrow></ArrowDownWideNarrow>
+            )}
           </Button>
         </div>
 

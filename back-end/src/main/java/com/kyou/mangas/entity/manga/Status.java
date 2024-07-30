@@ -2,8 +2,8 @@ package com.kyou.mangas.entity.manga;
 
 public enum Status {
 
-    IN_PROGRESS("em andamento"),
     FINISHED("finalizado"),
+    IN_PROGRESS("em andamento"),
     HIATUS("hiato"),
     NO_DETAILS("sem informações");
 
